@@ -1,8 +1,11 @@
+![left filtered](reveal.png)
+
 # React Native
+### One of these things is not like the others
 
 ---
 
-# One of these things is not like the others
+#️始める
 
 ---
 
@@ -10,11 +13,19 @@
 
 ---
 
+# PSA: You don't work for Facebook
+
+---
+
+### "React introduces a novel, radical and highly functional approach to constructing user interfaces. In brief, the application UI is simply expressed as a function of the current application state." - Colin Eberhardt
+
+---
+
 ## Getting Started
 
 * brew install nvm
 * brew install watchman
-* nvm install iojs-v1.6.4 (or whatever is the latest)
+* nvm install iojs-v2.0.1 (or whatever is the latest)
 * npm install -g react-native-cli
 * react-native init AwesomeProject
 
@@ -35,12 +46,6 @@
 
 ---
 
-## On the device
-
-*
-
----
-
 ## How is my code run
 
 ```objectivec
@@ -51,6 +56,21 @@
   RCTRootView *rootView = [[RCTRootView alloc] initWithBundleURL:jsCodeLocation
                                                       moduleName:@"TestProject"
                                                       launchOptions:launchOptions];
+```
+
+---
+
+## On the device
+
+* Provisioning Profiles
+* Live refresh
+
+```bash
+curl 'http://localhost:8081/index.ios.bundle?dev=false&minify=true' -o iOS/main.jsbundle
+```
+
+```objectivec
+jsCodeLocation = [[NSBundle mainBundle] URLForResource:@"main" withExtension:@"jsbundle"];
 ```
 
 ---
@@ -82,6 +102,13 @@ class NavButton extends React.Component {
   }
 }
 ```
+---
+
+### this slide deliberately left undefined
+
+---
+
+## UINavigationController
 
 ---
 
@@ -100,10 +127,20 @@ render: function() {
   );
 },
 ```
+---
+
+![left fit](simple_navigation.png)
+![right fit](standard_navigation.png)
+
+---
+
+## UITableViewController
 
 ---
 
 ## TableView
+
+![left fit](table_view.png)
 
 ```javascript
 render: function() {
@@ -115,6 +152,10 @@ render: function() {
   );
 },
 ```
+
+---
+
+## UITextView
 
 ---
 
@@ -135,6 +176,48 @@ var WithLabel = React.createClass({
 });
 ```
 
+![left fit](text.png)
+
+---
+
+## Text Input
+
+```javascript
+render: function() {
+    return (
+      <View>
+        <TextInput
+          autoCapitalize="none"
+          placeholder="Enter text to see events"
+          autoCorrect={false}
+          onFocus={() => this.updateText('onFocus')}
+          onBlur={() => this.updateText('onBlur')}
+          onChange={(event) => this.updateText(
+            'onChange text: ' + event.nativeEvent.text
+          )}
+          onEndEditing={(event) => this.updateText(
+            'onEndEditing text: ' + event.nativeEvent.text
+          )}
+          onSubmitEditing={(event) => this.updateText(
+            'onSubmitEditing text: ' + event.nativeEvent.text
+          )}
+          style={styles.default}
+        />
+        <Text style={styles.eventLabel}>
+          {this.state.curText}{'\n'}
+          (prev: {this.state.prevText})
+        </Text>
+      </View>
+    );
+}
+```
+
+![right fit](text_input.png)
+
+---
+
+## UITapGestureRecognizer / UIButton / didSelectRow / didSelectCell
+
 ---
 
 ## Touchable Highlight
@@ -150,24 +233,29 @@ renderButton: function() {
   );
 },
 ```
+
+![right fit](touchable.png)
+
 ---
 
 ## Animations
 
 ```javascript
-var AnimationTest = React.createClass({
-  componentDidMount () {
-    Animation.startAnimation(this.refs['this'], 400, 0, 'linear', {opacity: 1});
-  },
-
-  render () {
-    return (
-      <View ref='this' style={styles.test}>
-        <Text>Just an animation test</Text>
-      </View>
-    )
-  }
-});
+animateViewLayout: function() {
+    LayoutAnimation.configureNext(
+      LayoutAnimation.Presets.spring,
+      () => {
+        console.log('layout animation done.');
+        this.addWrapText();
+      },
+      (error) => { throw new Error(JSON.stringify(error)); }
+    );
+    this.setState({
+      viewStyle: {
+        margin: this.state.viewStyle.margin > 20 ? 20 : 60,
+      }
+    });
+}
 ```
 ---
 
@@ -190,37 +278,72 @@ var AnimationTest = React.createClass({
 
 ---
 
-## Magic
-### The test runner
+## The test runner
+
 ```objectivec
 RCTTestRunner *_runner;
 _runner = RCTInitRunnerForApp(@"Examples/UIExplorer/UIExplorerApp");
-[_runner runTest:_cmd module:@"NavigatorIOSExample"];
 ```
 
 ---
 
 ## Snapshots
 
-
+```objectivec
+[_runner runTest:_cmd module:@"NavigatorIOSExample"];
+```
 
 ---
 
-### Integration Tests
+## Integration Tests
 
 ### For when you need JS and Native
 
-* RCTTestRunner (sets up the world)
-* RCTTestModule (exported to JS)
+---
 
-Relies on XCTestCase
+# Styling it up
+### Flexbox vs Storyboards / Auto Layout
 
 ---
 
-## The Community
+# Flexbox
+
+* 320 all the things
+* Flow
+
+---
+
+# Storyboards / Auto Layout
+
+* ???
+
+---
+
+### There's not that great really
+
+---
+
+## Image assets
+
+* Yes, it uses the asset catalogue.
+
+```
+<Image source={require('image!house')} style={styles.image}/>
+```
+
+---
+
+## Resources
 
 * React Rocks (http://react.rocks/)
 * ReactNative.com
+* http://www.raywenderlich.com/99473/introducing-react-native-building-apps-javascript
+* https://github.com/facebook/react-native/tree/master/Examples/UIExplorer
+
+---
+
+#　質問がありますか
+## (any questions)
 
 ---
 
