@@ -5,11 +5,16 @@
 
 ---
 
+## 🍺🍺🍺🍺 rant
+
+---
+
 #️始める
 
 ---
 
 ### "React Native enables you to build world-class application experiences on native platforms using a consistent developer experience based on JavaScript and React. The focus of React Native is on developer efficiency across all the platforms you care about — learn once, write anywhere. Facebook uses React Native in multiple production apps and will continue investing in React Native."
+#### https://facebook.github.io/react-native/
 
 ---
 
@@ -31,10 +36,18 @@
 
 ---
 
-## What does it give you?
+## What does it give you? (iOS)
 
-1. A new xcode project
-1. A working index.ios.js file (that's the react part)
+1. <ProjectName>.xcodeproj
+1. iOS/
+1. <ProjectName>Tests/
+
+---
+
+## What does it give you? (node)
+
+1. node_modules
+1. package.json
 
 ---
 
@@ -330,6 +343,26 @@ _runner = RCTInitRunnerForApp(@"Examples/UIExplorer/UIExplorerApp");
 ```
 <Image source={require('image!house')} style={styles.image}/>
 ```
+
+---
+
+## Everything 🍎
+
+* Today Extensions
+* 🍎 Watch
+* Car Play
+
+---
+
+## Is this a good thing?
+
+---
+
+## Is this a bad thing?
+
+---
+
+## How to get iOS developers interested
 
 ---
 
